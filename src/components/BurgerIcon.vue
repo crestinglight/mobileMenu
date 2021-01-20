@@ -1,9 +1,9 @@
 <template>
-    <a href="#" class="burger__icon">
+    <button class="burger__icon">
       <div class="burger__line bacon"></div>
       <div class="burger__line lettuce"></div>
       <div class="burger__line tomato"></div>
-    </a>
+    </button>
 </template>
 
 <script>
@@ -28,6 +28,11 @@ export default {
 <style scoped>
 .burger__icon {
   display: block;
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: none;
+  outline: none;
   padding: 12px 16px;
 }
 
