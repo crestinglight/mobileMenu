@@ -63,6 +63,12 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
 /*   End Reset   */
 
 #app {

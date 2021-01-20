@@ -13,9 +13,9 @@
             </div>
             <ul id="navigation">
                 <li v-for="item in navList" :key="item.title">
-                    <a href="#" class="link__main">
+                    <a href="#" class="link__main" v-on:click="dropdownOpen">
                         <span class="link__main--anim">{{ item.title }}</span>
-                        <svg class="link__main--anim" width="8px" height="auto" viewBox="0 0 102 136" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <svg class="link__main--anim" width="8px" viewBox="0 0 102 136" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <g id="Artboard" fill="#51007A">
                                     <polygon id="Combined-Shape" points="101.941125 68 33.9411255 136 0 136 68 68 0 0 33.9411255 0"></polygon>
@@ -25,8 +25,29 @@
                     </a>
                     <div class="divider"></div>
                     <ul v-if="item.subcategories" class="sub__menu">
+                        <div class="sub__header">
+                            <h3>{{ item.title }}</h3>
+                            <button v-on:click="dropdownClose">
+                                <svg width="14px" height="15px" viewBox="0 0 14 15">
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="Artboard" fill="#51007A" fill-rule="nonzero">
+                                            <path d="M7,6.08578644 L12.3033009,0.782485579 C12.6938252,0.391961287 13.3269901,0.391961287 13.7175144,0.782485579 C14.1080387,1.17300987 14.1080387,1.80617485 13.7175144,2.19669914 L8.41421356,7.5 L13.7175144,12.8033009 C14.1080387,13.1938252 14.1080387,13.8269901 13.7175144,14.2175144 C13.3269901,14.6080387 12.6938252,14.6080387 12.3033009,14.2175144 L7,8.91421356 L1.69669914,14.2175144 C1.30617485,14.6080387 0.67300987,14.6080387 0.282485579,14.2175144 C-0.108038713,13.8269901 -0.108038713,13.1938252 0.282485579,12.8033009 L5.58578644,7.5 L0.282485579,2.19669914 C-0.108038713,1.80617485 -0.108038713,1.17300987 0.282485579,0.782485579 C0.67300987,0.391961287 1.30617485,0.391961287 1.69669914,0.782485579 L7,6.08578644 Z" id="Combined-Shape"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
                         <li v-for="subcat in item.subcategories" :key="subcat.title">
-                            <a href="#">{{ subcat.title }}</a>
+                            <a href="#" v-on:click="dropdownToggle">
+                                <span>{{ subcat.title }}</span>
+                                <svg class="svg__down" width="8px" viewBox="0 0 102 136" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g id="Artboard" fill="#fff">
+                                            <polygon id="Combined-Shape" points="101.941125 68 33.9411255 136 0 136 68 68 0 0 33.9411255 0"></polygon>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </a>
                             <ul v-if="subcat.subcategories" class="sub__menu--tertiary">
                                 <li v-for="doubleSubCat in subcat.subcategories" :key="doubleSubCat.title">
                                     <a href="#">{{ doubleSubCat.title }}</a>
@@ -153,6 +174,15 @@ export default {
                     delay: 0.5,
                     y: 0,
                 })
+                gsap.to(".link__main--anim", 
+                    {
+                    stagger: 0.01,
+                    ease: "power2.in",
+                    duration: 0.1,
+                    x: -15,
+                    y: -15,
+                    opacity: 0
+                })
                 gsap.fromTo(".nav__wrap", 
                     {scaleX: 1, scaleY: 1},
                     {
@@ -171,11 +201,30 @@ export default {
             }
             this.menuOpen = !this.menuOpen;
             console.log("Menu Open: "+this.menuOpen);
+        },
+        dropdownOpen: function (event) {
+            let dropdownLink = event.currentTarget;
+            let list = dropdownLink.nextSibling.nextSibling;
+            list.classList.add("open");
+        },
+        dropdownClose: function (event) {
+            let buttonPressed = event.currentTarget;
+            let list = buttonPressed.parentElement.parentElement;
+            list.classList.remove("open");
+        },
+        dropdownToggle: function (event) {
+            let subnavLink = event.currentTarget;
+            let sublist = subnavLink.nextSibling;
+            subnavLink.classList.toggle("svg__up");
+            sublist.classList.toggle("open");
         }
+    },
+    mounted(){
     },
     data() {
         return {
             menuOpen: false,
+            currTitle: "Home",
             navList: [
                 {
                     title: "Games",
@@ -529,9 +578,53 @@ export default {
     overflow: hidden;
     transform: scale(0.001, 0);
 }
-.sub__menu, sub__menu--tertiary {
-    max-height: 0;
+.sub__header {
+    position: relative;
+}
+.sub__header button {
+    background-color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    padding: 0 24px;
+}
+.sub__menu {
     overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    z-index: 300;
+    width: 80%;
+    min-height: calc(100vh - 126px);
+    background-color: #E70941;
+    font-family: 'Overpass', Helvetica, sans-serif;
+    font-weight: 400;
+    transition: 0.2s all ease-in;
+} 
+.sub__menu.open {
+    left: 20%;
+}
+.sub__menu h3 {
+    background-color: #51007A;
+    color: white;
+    font-family: 'Cabin', Arial, sans-serif;
+    font-size: 22px; 
+    padding: 24px 16px;
+}
+.sub__menu > li {
+    border-bottom: 3px solid white;
+}
+.sub__menu > li a {
+    color: white;
+}
+.sub__menu--tertiary {
+    max-height: 0px;
+    overflow: hidden;
+    transition: 0.3s all ease;
+}
+.sub__menu--tertiary.open {
+    max-height: 1000px;
 }
 .hello__wrap {
     background-color: #E70941;
@@ -552,6 +645,9 @@ export default {
 .hello h2 {
     margin: 0 16px;
 }
+ul#navigation {
+    position: relative;
+}
 ul#navigation > li a {
     font-family: 'Cabin', Arial, sans-serif;
     font-weight: 700;
@@ -563,12 +659,6 @@ ul#navigation > li a {
     padding: 22px 16px;
     transition: 0.2s color ease-in;
 }
-ul#navigation > li a:hover {
-    color: #E70941;
-}
-ul#navigation > li a:hover + .divider {
-    background-color: #E70941;
-}
 .divider {
     height: 3px;
     display: block;
@@ -579,5 +669,12 @@ ul#navigation > li a:hover + .divider {
     background-color: #51007A;
     transform: translateX(-100vw);
     transition: 0.2s background-color ease-in;
+}
+.svg__down {
+    transform: rotate(90deg);
+    transition: 0.3s all ease;
+}
+.svg__up .svg__down {
+    transform: rotate(-90deg);
 }
 </style>
