@@ -1,5 +1,7 @@
 <template>
-    <h1>Home</h1>
+    <div class="page">
+        <h1>Home</h1>
+    </div>
 </template>
 
 <script>
@@ -13,18 +15,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-    margin: 40px 0 0;
-}
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-li {
-    display: inline-block;
-    margin: 0 10px;
-}
-a {
-    color: #42b983;
+.page {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to bottom right, #51007A, #E70941);
+    color: white;
 }
 </style>

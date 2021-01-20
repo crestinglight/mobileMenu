@@ -71,10 +71,19 @@ table {
   -webkit-font-smoothing: antialiased;
   color: #51007A;
   background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: "Cabin", Arial, sans-serif;
   font-weight: 700;
   -webkit-font-smoothing: antialiased;
+}
+h1 {
+  font-size: 24px;
+}
+h2 {
+  font-size: 18px;
 }
 </style>

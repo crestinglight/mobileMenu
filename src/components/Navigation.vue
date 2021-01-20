@@ -1,6 +1,9 @@
 <template>
     <div class="navigation__wrapper">
-        <h1>Nav</h1>
+        <div class="logo">
+            <h1>My</h1>
+            <h1>Media</h1>
+        </div>
         <BurgerIcon />
         <ul id="navigation">
             <li v-for="item in navList" :key="item.title">
@@ -200,8 +203,23 @@ export default {
     align-items: center;
     position: relative;
 }
+.logo {
+    position: relative;
+    padding: 12px 16px;
+    top: -9px;
+}
+.logo h1 {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 28px;
+}
+.logo h1:nth-child(2) {
+    position: absolute;
+    top: 28px;
+    left: 42px;
+}
 #navigation {
     width: 200px;
+    display: none;
     position: absolute;
     bottom: 0;
     left: 0;

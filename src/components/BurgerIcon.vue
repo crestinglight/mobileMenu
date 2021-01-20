@@ -28,7 +28,7 @@ export default {
 <style scoped>
 .burger__icon {
   display: block;
-  padding: 6px;
+  padding: 12px 16px;
 }
 
 .burger__line {
