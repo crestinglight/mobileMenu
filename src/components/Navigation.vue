@@ -13,7 +13,16 @@
             </div>
             <ul id="navigation">
                 <li v-for="item in navList" :key="item.title">
-                    <a href="#" class="link__main">{{ item.title }}</a>
+                    <a href="#" class="link__main">
+                        <span class="link__main--anim">{{ item.title }}</span>
+                        <svg class="link__main--anim" width="8px" height="auto" viewBox="0 0 102 136" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="Artboard" fill="#51007A">
+                                    <polygon id="Combined-Shape" points="101.941125 68 33.9411255 136 0 136 68 68 0 0 33.9411255 0"></polygon>
+                                </g>
+                            </g>
+                        </svg>
+                    </a>
                     <div class="divider"></div>
                     <ul v-if="item.subcategories" class="sub__menu">
                         <li v-for="subcat in item.subcategories" :key="subcat.title">
@@ -57,10 +66,10 @@ export default {
                     delay: 0.3,
                     scaleX: 1
                 })
-                gsap.fromTo(".link__main", 
+                gsap.fromTo(".link__main--anim", 
                     {opacity: 0, x: -15, y: -15},
                     {
-                    stagger: 0.15,
+                    stagger: 0.1,
                     ease: "power2.out",
                     duration: 0.8,
                     delay: 1,
@@ -482,8 +491,17 @@ ul#navigation > li a {
     font-weight: 700;
     font-size: 24px;
     text-decoration: none;
-    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 22px 16px;
+    transition: 0.2s color ease-in;
+}
+ul#navigation > li a:hover {
+    color: #E70941;
+}
+ul#navigation > li a:hover + .divider {
+    background-color: #E70941;
 }
 .divider {
     height: 3px;
@@ -494,5 +512,6 @@ ul#navigation > li a {
     width: 100%;
     background-color: #51007A;
     transform: translateX(-100vw);
+    transition: 0.2s background-color ease-in;
 }
 </style>
