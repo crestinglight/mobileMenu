@@ -6,9 +6,15 @@
         </div>
         <BurgerIcon v-on:click.native="menuToggle" />
         <div class="nav__wrap">
+            <div class="hello__wrap">
+                <div class="hello">
+                    <h2>Hey there Indigo Slate</h2>
+                </div>
+            </div>
             <ul id="navigation">
                 <li v-for="item in navList" :key="item.title">
-                    <a href="#">{{ item.title }}</a>
+                    <a href="#" class="link__main">{{ item.title }}</a>
+                    <div class="divider"></div>
                     <ul v-if="item.subcategories" class="sub__menu">
                         <li v-for="subcat in item.subcategories" :key="subcat.title">
                             <a href="#">{{ subcat.title }}</a>
@@ -47,9 +53,29 @@ export default {
                     {scaleX: 0.001, scaleY: 1},
                     {
                     ease: "power2.out",
-                    duration: 0.8,
+                    duration: 0.7,
                     delay: 0.3,
                     scaleX: 1
+                })
+                gsap.fromTo(".link__main", 
+                    {opacity: 0, x: -15, y: -15},
+                    {
+                    stagger: 0.15,
+                    ease: "power2.out",
+                    duration: 0.8,
+                    delay: 1,
+                    x: 0,
+                    y: 0,
+                    opacity: 1
+                })
+                gsap.fromTo(".divider", 
+                    {x: "-100vw"},
+                    {
+                    stagger: 0.1,
+                    ease: "power2.out",
+                    duration: 0.8,
+                    delay: 0.8,
+                    x: 0
                 })
             }else{
                 gsap.fromTo(".nav__wrap", 
@@ -431,5 +457,42 @@ export default {
 .sub__menu, sub__menu--tertiary {
     max-height: 0;
     overflow: hidden;
+}
+.hello__wrap {
+    background-color: #E70941;
+    color: white;
+    font-family: 'Overpass', Helvetica, sans-serif;
+    font-size: 16px;
+    background-image: linear-gradient(to top left, #51007A, #E70941);
+}
+.hello {
+    padding: 12px 0px 32px;
+    display: block;
+    width: 100%;
+    background-image: url('../assets/brushstrokes.png');
+    background-repeat: no-repeat;
+    background-position: 50vw 50%;
+    background-size: auto 250%;
+}
+.hello h2 {
+    margin: 0 16px;
+}
+ul#navigation > li a {
+    font-family: 'Cabin', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    text-decoration: none;
+    display: block;
+    padding: 22px 16px;
+}
+.divider {
+    height: 3px;
+    display: block;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #51007A;
+    transform: translateX(-100vw);
 }
 </style>
