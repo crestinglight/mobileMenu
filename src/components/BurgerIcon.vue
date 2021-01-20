@@ -43,4 +43,12 @@ export default {
   margin: 4px 0;
   transform: skewX(38deg);
 }
+.bacon {
+  position: relative;
+  left: -6px;
+  transform-origin: left top;
+}
+.lettuce, .tomato {
+  transform-origin: left bottom;
+}
 </style>

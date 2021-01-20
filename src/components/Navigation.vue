@@ -51,6 +51,40 @@ export default {
     methods: {
         menuToggle: function () {
             if(this.menuOpen === false){
+                gsap.to(".lettuce", 
+                    {
+                    ease: "power2.in",
+                    duration: 0.3,
+                    y: 12,
+                })
+                gsap.to(".lettuce", 
+                    {
+                    ease: "power2.in",
+                    duration: 0.3,
+                    delay: 0.35,
+                    rotation: -45,
+                    skewX: 45,
+                    y: 10
+                })
+                gsap.to(".tomato", 
+                    {
+                    ease: "power2.in",
+                    duration: 0.3,
+                    delay: 0.35,
+                    rotation: -45,
+                    skewX: 45,
+                    y: -2
+                })
+                gsap.to(".bacon", 
+                    {
+                    ease: "power2.in",
+                    duration: 0.3,
+                    delay: 0.35,
+                    rotation: 45,
+                    skewX: -45,
+                    x: 6,
+                    y: 1.74
+                })
                 gsap.fromTo(".nav__wrap", 
                     {scaleX: 0.001, scaleY: 0},
                     {
@@ -87,6 +121,38 @@ export default {
                     x: 0
                 })
             }else{
+                gsap.to(".lettuce", 
+                    {
+                    ease: "power2.in",
+                    duration: 0.3,
+                    rotation: 0,
+                    skewX: 38,
+                    y: 12
+                })
+                gsap.to(".tomato", 
+                    {
+                    ease: "power2.in",
+                    duration: 0.3,
+                    rotation: 0,
+                    skewX: 38,
+                    y: 0
+                })
+                gsap.to(".bacon", 
+                    {
+                    ease: "power2.in",
+                    duration: 0.3,
+                    rotation: 0,
+                    skewX: 38,
+                    x: 0,
+                    y: 0
+                })
+                gsap.to(".lettuce", 
+                    {
+                    ease: "power2.in",
+                    duration: 0.3,
+                    delay: 0.5,
+                    y: 0,
+                })
                 gsap.fromTo(".nav__wrap", 
                     {scaleX: 1, scaleY: 1},
                     {
