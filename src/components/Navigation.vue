@@ -16,9 +16,9 @@
                     <a href="#" class="link__main" v-on:click="dropdownOpen">
                         <span class="link__main--anim">{{ item.title }}</span>
                         <svg class="link__main--anim" width="8px" viewBox="0 0 102 136" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <g id="Artboard" fill="#51007A">
-                                    <polygon id="Combined-Shape" points="101.941125 68 33.9411255 136 0 136 68 68 0 0 33.9411255 0"></polygon>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g fill="#51007A">
+                                    <polygon points="101.941125 68 33.9411255 136 0 136 68 68 0 0 33.9411255 0"></polygon>
                                 </g>
                             </g>
                         </svg>
@@ -29,9 +29,9 @@
                             <h3>{{ item.title }}</h3>
                             <button v-on:click="dropdownClose">
                                 <svg width="14px" height="15px" viewBox="0 0 14 15">
-                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <g id="Artboard" fill="#51007A" fill-rule="nonzero">
-                                            <path d="M7,6.08578644 L12.3033009,0.782485579 C12.6938252,0.391961287 13.3269901,0.391961287 13.7175144,0.782485579 C14.1080387,1.17300987 14.1080387,1.80617485 13.7175144,2.19669914 L8.41421356,7.5 L13.7175144,12.8033009 C14.1080387,13.1938252 14.1080387,13.8269901 13.7175144,14.2175144 C13.3269901,14.6080387 12.6938252,14.6080387 12.3033009,14.2175144 L7,8.91421356 L1.69669914,14.2175144 C1.30617485,14.6080387 0.67300987,14.6080387 0.282485579,14.2175144 C-0.108038713,13.8269901 -0.108038713,13.1938252 0.282485579,12.8033009 L5.58578644,7.5 L0.282485579,2.19669914 C-0.108038713,1.80617485 -0.108038713,1.17300987 0.282485579,0.782485579 C0.67300987,0.391961287 1.30617485,0.391961287 1.69669914,0.782485579 L7,6.08578644 Z" id="Combined-Shape"></path>
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g fill="#51007A" fill-rule="nonzero">
+                                            <path d="M7,6.08578644 L12.3033009,0.782485579 C12.6938252,0.391961287 13.3269901,0.391961287 13.7175144,0.782485579 C14.1080387,1.17300987 14.1080387,1.80617485 13.7175144,2.19669914 L8.41421356,7.5 L13.7175144,12.8033009 C14.1080387,13.1938252 14.1080387,13.8269901 13.7175144,14.2175144 C13.3269901,14.6080387 12.6938252,14.6080387 12.3033009,14.2175144 L7,8.91421356 L1.69669914,14.2175144 C1.30617485,14.6080387 0.67300987,14.6080387 0.282485579,14.2175144 C-0.108038713,13.8269901 -0.108038713,13.1938252 0.282485579,12.8033009 L5.58578644,7.5 L0.282485579,2.19669914 C-0.108038713,1.80617485 -0.108038713,1.17300987 0.282485579,0.782485579 C0.67300987,0.391961287 1.30617485,0.391961287 1.69669914,0.782485579 L7,6.08578644 Z"></path>
                                         </g>
                                     </g>
                                 </svg>
@@ -41,16 +41,27 @@
                             <a href="#" v-on:click="dropdownToggle">
                                 <span>{{ subcat.title }}</span>
                                 <svg class="svg__down" width="8px" viewBox="0 0 102 136" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <g id="Artboard" fill="#fff">
-                                            <polygon id="Combined-Shape" points="101.941125 68 33.9411255 136 0 136 68 68 0 0 33.9411255 0"></polygon>
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <g fill="#fff">
+                                            <polygon points="101.941125 68 33.9411255 136 0 136 68 68 0 0 33.9411255 0"></polygon>
                                         </g>
                                     </g>
                                 </svg>
                             </a>
                             <ul v-if="subcat.subcategories" class="sub__menu--tertiary">
                                 <li v-for="doubleSubCat in subcat.subcategories" :key="doubleSubCat.title">
-                                    <a href="#">{{ doubleSubCat.title }}</a>
+                                    <a href="#">
+                                        <div class="arrow__highlight">
+                                            <svg width="8px" viewBox="0 0 102 136" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                    <g fill="#fff">
+                                                        <polygon points="101.941125 68 33.9411255 136 0 136 68 68 0 0 33.9411255 0"></polygon>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <span>{{ doubleSubCat.title }}</span>
+                                    </a>
                                 </li>
                             </ul>
                         </li>
@@ -203,16 +214,23 @@ export default {
             console.log("Menu Open: "+this.menuOpen);
         },
         dropdownOpen: function (event) {
+            event.preventDefault();
             let dropdownLink = event.currentTarget;
             let list = dropdownLink.nextSibling.nextSibling;
             list.classList.add("open");
         },
         dropdownClose: function (event) {
+            event.preventDefault();
             let buttonPressed = event.currentTarget;
             let list = buttonPressed.parentElement.parentElement;
+            let subs = document.getElementsByClassName("sub__menu--tertiary");
+            for (let i = 0; i < subs.length; i++) {
+                subs[i].classList.remove("open");
+            }
             list.classList.remove("open");
         },
         dropdownToggle: function (event) {
+            event.preventDefault();
             let subnavLink = event.currentTarget;
             let sublist = subnavLink.nextSibling;
             subnavLink.classList.toggle("svg__up");
@@ -589,17 +607,30 @@ export default {
     height: 100%;
     padding: 0 24px;
 }
+ul#navigation {
+    position: relative;
+}
+ul#navigation > li a {
+    font-family: 'Cabin', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 16px;
+    transition: 0.2s color ease-in;
+}
 .sub__menu {
-    overflow: hidden;
+    overflow: auto;
     position: absolute;
     top: 0;
     left: 100%;
     z-index: 300;
     width: 80%;
     min-height: calc(100vh - 126px);
+    max-height: calc(100vh - 126px);
     background-color: #E70941;
-    font-family: 'Overpass', Helvetica, sans-serif;
-    font-weight: 400;
     transition: 0.2s all ease-in;
 } 
 .sub__menu.open {
@@ -612,19 +643,34 @@ export default {
     font-size: 22px; 
     padding: 24px 16px;
 }
-.sub__menu > li {
-    border-bottom: 3px solid white;
-}
-.sub__menu > li a {
+ul#navigation li .sub__menu > li a {
+    font-family: 'Overpass', Helvetica, sans-serif;
+    font-weight: 600;
     color: white;
+    border-bottom: 3px solid white;
 }
 .sub__menu--tertiary {
     max-height: 0px;
     overflow: hidden;
     transition: 0.3s all ease;
+    background-color: white;
 }
 .sub__menu--tertiary.open {
     max-height: 1000px;
+}
+ul#navigation li .sub__menu--tertiary li {
+    border-bottom: 2px solid #51007A;
+}
+ul#navigation li .sub__menu--tertiary li a {
+    position: relative;
+    display: block;
+    font-family: 'Overpass', Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    color: #51007A;
+    padding: 16px 54px;
+    border: none;
 }
 .hello__wrap {
     background-color: #E70941;
@@ -643,21 +689,8 @@ export default {
     background-size: auto 250%;
 }
 .hello h2 {
+    font-family: 'Overpass', Helvetica, sans-serif;
     margin: 0 16px;
-}
-ul#navigation {
-    position: relative;
-}
-ul#navigation > li a {
-    font-family: 'Cabin', Arial, sans-serif;
-    font-weight: 700;
-    font-size: 24px;
-    text-decoration: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 22px 16px;
-    transition: 0.2s color ease-in;
 }
 .divider {
     height: 3px;
@@ -676,5 +709,17 @@ ul#navigation > li a {
 }
 .svg__up .svg__down {
     transform: rotate(-90deg);
+}
+.arrow__highlight {
+    background-color: #51007A;
+    height: 100%;
+    padding: 0 16px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-bottom: 2px solid white;
+}
+.arrow__highlight svg {
+    margin: 18px 0;
 }
 </style>
