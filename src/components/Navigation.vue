@@ -13,9 +13,9 @@
             </div>
             <ul id="navigation">
                 <li v-for="item in navList" :key="item.title">
-                    <a href="#" class="link__main" v-on:click="dropdownOpen">
+                    <a href="#" class="link__main" v-on:click="checkSubMenus">
                         <span class="link__main--anim">{{ item.title }}</span>
-                        <svg class="link__main--anim" width="8px" viewBox="0 0 102 136" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <svg class="link__main--anim" width="8px" viewBox="0 0 102 136" version="1.1">
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                 <g fill="#51007A">
                                     <polygon points="101.941125 68 33.9411255 136 0 136 68 68 0 0 33.9411255 0"></polygon>
@@ -40,7 +40,7 @@
                         <li v-for="subcat in item.subcategories" :key="subcat.title">
                             <a href="#" v-on:click="dropdownToggle">
                                 <span>{{ subcat.title }}</span>
-                                <svg class="svg__down" width="8px" viewBox="0 0 102 136" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <svg class="svg__down" width="8px" viewBox="0 0 102 136" version="1.1">
                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                         <g fill="#fff">
                                             <polygon points="101.941125 68 33.9411255 136 0 136 68 68 0 0 33.9411255 0"></polygon>
@@ -52,7 +52,7 @@
                                 <li v-for="doubleSubCat in subcat.subcategories" :key="doubleSubCat.title">
                                     <a href="#">
                                         <div class="arrow__highlight">
-                                            <svg width="8px" viewBox="0 0 102 136" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <svg width="8px" viewBox="0 0 102 136" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                     <g fill="#fff">
                                                         <polygon points="101.941125 68 33.9411255 136 0 136 68 68 0 0 33.9411255 0"></polygon>
@@ -211,23 +211,46 @@ export default {
                 })
             }
             this.menuOpen = !this.menuOpen;
-            console.log("Menu Open: "+this.menuOpen);
+            if (!this.menuOpen) {
+                let subs = document.getElementsByClassName("sub__menu");
+                for (let i = 0; i < subs.length; i++) {
+                    subs[i].classList.remove("open");
+                }
+                this.closeTertiaryMenus();
+            }
+        },
+        checkSubMenus: function(event) {
+            if (this.subMenuOpen) {
+                this.closeAllSubs();
+            }else{
+                this.dropdownOpen(event);
+            }
         },
         dropdownOpen: function (event) {
             event.preventDefault();
             let dropdownLink = event.currentTarget;
             let list = dropdownLink.nextSibling.nextSibling;
             list.classList.add("open");
+            this.subMenuOpen = true;
+            console.log(this.subMenuOpen);
         },
         dropdownClose: function (event) {
             event.preventDefault();
             let buttonPressed = event.currentTarget;
             let list = buttonPressed.parentElement.parentElement;
+            list.classList.remove("open");
+
+            this.closeTertiaryMenus();
+            this.subMenuOpen = false;
+            console.log(this.subMenuOpen);
+        },
+        closeTertiaryMenus: function() {
             let subs = document.getElementsByClassName("sub__menu--tertiary");
             for (let i = 0; i < subs.length; i++) {
                 subs[i].classList.remove("open");
             }
-            list.classList.remove("open");
+
+            this.closeAllArrows();
         },
         dropdownToggle: function (event) {
             event.preventDefault();
@@ -235,6 +258,21 @@ export default {
             let sublist = subnavLink.nextSibling;
             subnavLink.classList.toggle("svg__up");
             sublist.classList.toggle("open");
+        },
+        closeAllSubs: function(){
+            let subs = document.getElementsByClassName("sub__menu");
+            for (let i = 0; i < subs.length; i++) {
+                subs[i].classList.remove("open");
+            }
+
+            this.subMenuOpen = false;
+            this.closeTertiaryMenus();
+        },
+        closeAllArrows: function(){
+            let arrows = document.getElementsByTagName("a");
+            for (let a = 0; a < arrows.length; a++) {
+                arrows[a].classList.remove("svg__up");
+            }
         }
     },
     mounted(){
@@ -242,6 +280,7 @@ export default {
     data() {
         return {
             menuOpen: false,
+            subMenuOpen: false,
             currTitle: "Home",
             navList: [
                 {
