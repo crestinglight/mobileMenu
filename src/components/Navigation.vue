@@ -280,6 +280,7 @@ export default {
         setPageTitle: function (ptitle){
             this.$emit('setPageTitle', ptitle);
 
+            this.subMenuOpen = false;
             this.menuToggle();
         }
     },
