@@ -50,7 +50,7 @@
                             </a>
                             <ul v-if="subcat.subcategories" class="sub__menu--tertiary">
                                 <li v-for="doubleSubCat in subcat.subcategories" :key="doubleSubCat.title">
-                                    <a href="#">
+                                    <a href="#" v-on:click="setPageTitle(doubleSubCat.title)">
                                         <div class="arrow__highlight">
                                             <svg width="8px" viewBox="0 0 102 136" version="1.1">
                                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -80,6 +80,11 @@ export default {
     components: {
         BurgerIcon
     },
+    props: {
+        pageTitle: {
+            type: String,
+        }
+      },
     methods: {
         menuToggle: function () {
             if(this.menuOpen === false){
@@ -232,7 +237,6 @@ export default {
             let list = dropdownLink.nextSibling.nextSibling;
             list.classList.add("open");
             this.subMenuOpen = true;
-            console.log(this.subMenuOpen);
         },
         dropdownClose: function (event) {
             event.preventDefault();
@@ -242,7 +246,6 @@ export default {
 
             this.closeTertiaryMenus();
             this.subMenuOpen = false;
-            console.log(this.subMenuOpen);
         },
         closeTertiaryMenus: function() {
             let subs = document.getElementsByClassName("sub__menu--tertiary");
@@ -273,6 +276,11 @@ export default {
             for (let a = 0; a < arrows.length; a++) {
                 arrows[a].classList.remove("svg__up");
             }
+        },
+        setPageTitle: function (ptitle){
+            this.$emit('setPageTitle', ptitle);
+
+            this.menuToggle();
         }
     },
     mounted(){
@@ -281,7 +289,6 @@ export default {
         return {
             menuOpen: false,
             subMenuOpen: false,
-            currTitle: "Home",
             navList: [
                 {
                     title: "Games",

@@ -1,19 +1,29 @@
 <template>
   <div id="app">
-    <Navigation />
-    <Home/>
+    <Navigation  v-on:setPageTitle="updateTitle($event)"></Navigation>
+    <div class="page">
+        <h1>{{ currentPageTitle }}</h1>
+    </div>
   </div>
 </template>
 
 <script>
-import Home from './components/Home.vue';
 import Navigation from './components/Navigation.vue';
 
 export default {
   name: 'App',
+  data() {
+    return {
+      currentPageTitle: "Home"
+    }
+  },
   components: {
-    Home,
     Navigation
+  },
+  methods: {
+    updateTitle: function(updatedTitle) {
+      this.currentPageTitle = updatedTitle;
+    }
   }
 }
 </script>
@@ -91,5 +101,14 @@ h1 {
 }
 h2 {
   font-size: 18px;
+}
+.page {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to bottom right, #51007A, #E70941);
+    color: white;
 }
 </style>
